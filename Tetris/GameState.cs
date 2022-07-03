@@ -27,6 +27,7 @@
         public BlockQueue BlockQueue { get; }
         public bool GameOver { get; private set; }
         public int Score { get; private set; }
+        public int Level { get; private set; } = 0;
         public Block HeldBlock { get; private set; }
         public bool CanHold { get; private set; }
 
@@ -97,7 +98,7 @@
             foreach (Position p in CurrentBlock.TilePositions()) 
                 GameGrid[p.Row, p.Column] = CurrentBlock.ID;
 
-            Score += GameGrid.ClearFullRows();
+            CalculateScore(GameGrid.ClearFullRows());
 
             if (IsGameOver())
                 GameOver = true;
@@ -105,6 +106,124 @@
             {
                 CurrentBlock = BlockQueue.GetAndUpdate();
                 CanHold = true;
+            }
+
+        }
+
+        private void CalculateScore(int numRowsCleared)
+        {
+            switch (Level)
+            {
+                case 0:
+                    if (numRowsCleared == 1)
+                        Score = Score + 40;
+                    else if (numRowsCleared == 2)
+                    {
+                        Score = Score + 100;
+                        Level += 1;
+                    }
+                    else if (numRowsCleared == 3)
+                    {
+                        Score = Score + 300;
+                        Level += 1;
+                    }
+                    else if (numRowsCleared >= 4)
+                    {
+                        Score = Score + 1200;
+                        Level += 1;
+                    }
+                    break;
+                case 1:
+                    if (numRowsCleared == 1)
+                        Score = Score + 80;
+                    else if (numRowsCleared == 2)
+                    {
+                        Score = Score + 200;
+                        Level += 1;
+                    }
+                    else if (numRowsCleared == 3)
+                    {
+                        Score = Score + 600;
+                        Level += 1;
+                    }
+                    else if (numRowsCleared >= 4)
+                    {
+                        Score = Score + 2400;
+                        Level += 1;
+                    }
+                    break;
+                case 2:
+                    if (numRowsCleared == 1)
+                        Score = Score + 120;
+                    else if (numRowsCleared == 2)
+                    {
+                        Score = Score + 300;
+                        Level += 1;
+                    }
+                    else if (numRowsCleared == 3)
+                    {
+                        Score = Score + 900;
+                        Level += 1;
+                    }
+                    else if (numRowsCleared >= 4)
+                    {
+                        Score = Score + 3600;
+                        Level += 1;
+                    }
+                    break;
+                case 3:
+                case 4:
+                case 5:
+                case 6:
+                case 7:
+                case 8:
+                    if (numRowsCleared == 1)
+                        Score = Score + 120;
+                    else if (numRowsCleared == 2)
+                    {
+                        Score = Score + 300;
+                        Level += 1;
+                    }
+                    else if (numRowsCleared == 3)
+                    {
+                        Score = Score + 900;
+                        Level += 1;
+                    }
+                    else if (numRowsCleared >= 4)
+                    {
+                        Score = Score + 3600;
+                        Level += 1;
+                    }
+                    break;
+                case 9:
+                    if (numRowsCleared == 1)
+                        Score = Score + 400;
+                    else if (numRowsCleared == 2)
+                    {
+                        Score = Score + 1000;
+                        Level += 1;
+                    }
+                    else if (numRowsCleared == 3)
+                    {
+                        Score = Score + 3000;
+                        Level += 1;
+                    }
+                    else if (numRowsCleared >= 4)
+                    {
+                        Score = Score + 12000;
+                        Level += 1;
+                    }
+                    break;
+                default:
+                    if (numRowsCleared == 1)
+                        Score = Score + 40 * (Level + 1);
+                    else if (numRowsCleared == 2)
+                        Score = Score + 100 * (Level + 1);
+                    else if (numRowsCleared == 3)
+                        Score = Score + 300 * (Level + 1);
+                    else if (numRowsCleared >= 4)
+                        Score = Score + 1200 * (Level + 1);
+                    break;
             }
 
         }

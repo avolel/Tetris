@@ -133,8 +133,6 @@ namespace Tetris
             Draw(gameState);
             while (!gameState.GameOver)
             {
-                if (gameState.Score >= 1000)
-                    delay = 25;
                 await Task.Delay(delay);
                 gameState.MoveBlockDown();
                 Draw(gameState);
@@ -151,7 +149,7 @@ namespace Tetris
             DrawBlock(gameState.CurrentBlock);
             DrawNextBlock(gameState.BlockQueue);
             DrawHeldBlock(gameState.HeldBlock);
-            ScoreText.Text = $"Score: {gameState.Score}";
+            ScoreText.Text = $"Score: {gameState.Score} Level: {gameState.Level}";
 
         }
 
