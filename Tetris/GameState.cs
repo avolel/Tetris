@@ -26,8 +26,10 @@
         public GameGrid GameGrid { get; }
         public BlockQueue BlockQueue { get; }
         public bool GameOver { get; private set; }
+        public bool GamePaused { get; private set; }
         public int Score { get; private set; }
         public int Level { get; private set; } = 0;
+        public int Delay { get; private set; } = 1200;
         public Block HeldBlock { get; private set; }
         public bool CanHold { get; private set; }
 
@@ -121,16 +123,19 @@
                     {
                         Score = Score + 100;
                         Level += 1;
+                        Delay += 1;
                     }
                     else if (numRowsCleared == 3)
                     {
                         Score = Score + 300;
                         Level += 1;
+                        Delay += 1;
                     }
                     else if (numRowsCleared >= 4)
                     {
                         Score = Score + 1200;
                         Level += 1;
+                        Delay += 1;
                     }
                     break;
                 case 1:
@@ -140,16 +145,19 @@
                     {
                         Score = Score + 200;
                         Level += 1;
+                        Delay += 2;
                     }
                     else if (numRowsCleared == 3)
                     {
                         Score = Score + 600;
                         Level += 1;
+                        Delay += 2;
                     }
                     else if (numRowsCleared >= 4)
                     {
                         Score = Score + 2400;
                         Level += 1;
+                        Delay += 2;
                     }
                     break;
                 case 2:
@@ -159,16 +167,19 @@
                     {
                         Score = Score + 300;
                         Level += 1;
+                        Delay += 3;
                     }
                     else if (numRowsCleared == 3)
                     {
                         Score = Score + 900;
                         Level += 1;
+                        Delay += 3;
                     }
                     else if (numRowsCleared >= 4)
                     {
                         Score = Score + 3600;
                         Level += 1;
+                        Delay += 3;
                     }
                     break;
                 case 3:
@@ -183,16 +194,19 @@
                     {
                         Score = Score + 300;
                         Level += 1;
+                        Delay -= 4;
                     }
                     else if (numRowsCleared == 3)
                     {
                         Score = Score + 900;
                         Level += 1;
+                        Delay -= 4;
                     }
                     else if (numRowsCleared >= 4)
                     {
                         Score = Score + 3600;
                         Level += 1;
+                        Delay -= 4;
                     }
                     break;
                 case 9:
@@ -202,27 +216,42 @@
                     {
                         Score = Score + 1000;
                         Level += 1;
+                        Delay -= 10;
                     }
                     else if (numRowsCleared == 3)
                     {
                         Score = Score + 3000;
                         Level += 1;
+                        Delay -= 10;
                     }
                     else if (numRowsCleared >= 4)
                     {
                         Score = Score + 12000;
                         Level += 1;
+                        Delay -= 10;
                     }
                     break;
                 default:
                     if (numRowsCleared == 1)
+                    {
                         Score = Score + 40 * (Level + 1);
+                        Delay = Delay - 40;
+                    }
                     else if (numRowsCleared == 2)
+                    {
                         Score = Score + 100 * (Level + 1);
+                        Delay = Delay - 100;
+                    }
                     else if (numRowsCleared == 3)
+                    {
                         Score = Score + 300 * (Level + 1);
+                        Delay = Delay - 300;
+                    }
                     else if (numRowsCleared >= 4)
+                    {
                         Score = Score + 1200 * (Level + 1);
+                        Delay = Delay - 1200;
+                    }
                     break;
             }
 
@@ -257,6 +286,12 @@
             CurrentBlock.Move(BlockDropDistance(), 0);
             PlaceBlock();
         }
+
+        public void PauseGame() =>
+            GamePaused = true;
+
+        public void UnPauseGame() =>
+            GamePaused = false;
 
         public void MoveBlockDown() 
         {

@@ -47,6 +47,14 @@
             </StackPanel>
         </Grid>
 
+        <Grid x:Name="GamePauseMenu" Background="#CC000000" Grid.RowSpan="2" Visibility="Hidden" Grid.ColumnSpan="3">
+            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                <TextBlock Text="Game Paused" FontSize="48" TextAlignment="Center"/>
+                <TextBlock x:Name="YourScoreText" Text="Score: " FontSize="36" TextAlignment="Center"/>
+                <Button Content="Continue" Background="LightGreen" Margin="0,20,0,0" Padding="5" Click="ContinueGame_Click"/>
+            </StackPanel>
+        </Grid>
+
 
     </Grid>
 </Window>

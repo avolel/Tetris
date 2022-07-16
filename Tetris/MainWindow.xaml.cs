@@ -133,13 +133,22 @@ namespace Tetris
             Draw(gameState);
             while (!gameState.GameOver)
             {
-                await Task.Delay(delay);
+                if (gameState.GamePaused)
+                {
+                    GamePauseMenu.Visibility = Visibility.Visible;
+                    YourScoreText.Text = $" Current Score: {gameState.Score}";
+                    break;
+                }
+                await Task.Delay(gameState.Delay);
                 gameState.MoveBlockDown();
                 Draw(gameState);
             }
 
-            GameOverMenu.Visibility = Visibility.Visible;
-            FinalScoreText.Text = $"Score: {gameState.Score}";
+            if (gameState.GameOver)
+            {
+                GameOverMenu.Visibility = Visibility.Visible;
+                FinalScoreText.Text = $"Score: {gameState.Score}";
+            }
         }
 
         private void Draw(GameState gameState)
@@ -158,7 +167,7 @@ namespace Tetris
             await GameLoop();
         }
 
-        private void Window_KeyDown(object sender, KeyEventArgs e)
+        private async void Window_KeyDown(object sender, KeyEventArgs e)
         {
             if (gameState.GameOver)
                 return;
@@ -185,6 +194,14 @@ namespace Tetris
                 case Key.D:
                     gameState.DropBlock();
                     break;
+                case Key.P:
+                    gameState.PauseGame();
+                    break;
+                case Key.U:
+                    gameState.UnPauseGame();
+                    GamePauseMenu.Visibility = Visibility.Hidden;
+                    await GameLoop();
+                    break;
                 default:
                     return;
             }
@@ -196,6 +213,13 @@ namespace Tetris
         {
             gameState = new GameState();
             GameOverMenu.Visibility = Visibility.Hidden;
+            await GameLoop();
+        }
+
+        private async void ContinueGame_Click(object sender, RoutedEventArgs e)
+        {
+            gameState.UnPauseGame();
+            GamePauseMenu.Visibility = Visibility.Hidden;
             await GameLoop();
         }
     }
