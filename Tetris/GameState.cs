@@ -123,19 +123,19 @@
                     {
                         Score = Score + 100;
                         Level += 1;
-                        Delay += 1;
+                        Delay -= 1;
                     }
                     else if (numRowsCleared == 3)
                     {
                         Score = Score + 300;
                         Level += 1;
-                        Delay += 1;
+                        Delay -= 1;
                     }
                     else if (numRowsCleared >= 4)
                     {
                         Score = Score + 1200;
                         Level += 1;
-                        Delay += 1;
+                        Delay -= 1;
                     }
                     break;
                 case 1:
@@ -145,19 +145,19 @@
                     {
                         Score = Score + 200;
                         Level += 1;
-                        Delay += 2;
+                        Delay -= 1;
                     }
                     else if (numRowsCleared == 3)
                     {
                         Score = Score + 600;
                         Level += 1;
-                        Delay += 2;
+                        Delay -= 1;
                     }
                     else if (numRowsCleared >= 4)
                     {
                         Score = Score + 2400;
                         Level += 1;
-                        Delay += 2;
+                        Delay -= 1;
                     }
                     break;
                 case 2:
@@ -167,19 +167,19 @@
                     {
                         Score = Score + 300;
                         Level += 1;
-                        Delay += 3;
+                        Delay -= 1;
                     }
                     else if (numRowsCleared == 3)
                     {
                         Score = Score + 900;
                         Level += 1;
-                        Delay += 3;
+                        Delay -= 1;
                     }
                     else if (numRowsCleared >= 4)
                     {
                         Score = Score + 3600;
                         Level += 1;
-                        Delay += 3;
+                        Delay -=1;
                     }
                     break;
                 case 3:
