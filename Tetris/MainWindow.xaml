@@ -27,7 +27,7 @@
             <Canvas x:Name="GameCanvas" Background="#101010" Width="250" ClipToBounds="True" Loaded="GameCanvas_Loaded" Height="510"/>
         </Viewbox>
 
-        <TextBlock x:Name="ScoreText" Grid.Row="0" Grid.Column="1" Text="Score: " Margin="0,10" TextAlignment="Center"/>
+        <TextBlock x:Name="ScoreText" Grid.Row="0" FontWeight="ExtraBold" Grid.Column="1" Text="Score: " Margin="0,10" TextAlignment="Center"/>
 
         <StackPanel Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Right">
             <TextBlock Text="Hold" TextAlignment="Center"/>
