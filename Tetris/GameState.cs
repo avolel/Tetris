@@ -112,35 +112,31 @@
 
         }
 
-        private void ScoreAndLevelUp(int point, int pointMultiplier)
+        private void LevelUp()
         {
             if (Delay <= 0)
                 Delay = 1;
             else
                 Delay -= 1;
-            Score = Score + (point * pointMultiplier);
             Level += 1;
-        }
-
-        private void Scoring(int point, int pointMultiplier)
-        {
-            if (Delay <= 0)
-                Delay = 1;
-            else
-                Delay -= 1;
-            Score = Score + (point * pointMultiplier);
         }
 
         private void CalculateScore(int numRowsCleared)
         {
             if (numRowsCleared == 1)
-                Scoring(1, 5);
+                Score = Score + 50;
             else if (numRowsCleared == 2)
-                ScoreAndLevelUp(5, 6);
+                Score = Score + 100;
             else if (numRowsCleared == 3)
-                ScoreAndLevelUp(20, 15);
+            {
+                Score = Score + 700;
+                LevelUp();
+            }
             else if (numRowsCleared >= 4)
-                ScoreAndLevelUp(80, 100);
+            {
+                Score = Score + 800;
+                LevelUp();
+            }
         }
 
         private int TileDropDistance(Position p)
