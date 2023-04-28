@@ -135,7 +135,7 @@
             else if (numRowsCleared >= 4)
             {
                 Score = Score + 800;
-                LevelUp(600);
+                LevelUp(200);
             }
         }
 
