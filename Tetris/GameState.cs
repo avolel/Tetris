@@ -112,12 +112,12 @@
 
         }
 
-        private void LevelUp()
+        private void LevelUp(int levelupnum)
         {
             if (Delay <= 0)
                 Delay = 1;
             else
-                Delay -= 1;
+                Delay -= (Delay <= levelupnum) ? 1: levelupnum;
             Level += 1;
         }
 
@@ -130,12 +130,12 @@
             else if (numRowsCleared == 3)
             {
                 Score = Score + 700;
-                LevelUp();
+                LevelUp(100);
             }
             else if (numRowsCleared >= 4)
             {
                 Score = Score + 800;
-                LevelUp();
+                LevelUp(600);
             }
         }
 
